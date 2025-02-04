@@ -95,29 +95,22 @@
         <p>إذا لم يكن لديك حساب، سيتم إرسال دعوة إلى بريدك الإلكتروني</p>
     </div>
 
-    <script>
-        // Initialize Netlify Identity
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        window.location.href = "/dashboard/";
-                    });
-                }
-            });
-        }
-
-        // Login handler
-        function handleLogin() {
-            window.netlifyIdentity.open("login");
-        }
-
-        // Check current user status
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.netlifyIdentity.currentUser()) {
-                window.location.href = "/dashboard/";
-            }
+    <!-- In index.html -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  // Initialize Netlify Identity
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          // Redirect after login
+          window.location.href = "/dashboard/";
         });
-    </script>
+      }
+    });
+    // Initialize the widget
+    window.netlifyIdentity.init();
+  }
+</script>
 </body>
 </html>
