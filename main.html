@@ -3,192 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركة التصميم الداخلي والبناء - متابعة المشاريع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <title>تسجيل الدخول</title>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            line-height: 1.6;
-        }
-
-        /* Header Styles */
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Navigation Styles */
-        .nav {
-            background-color: #34495e;
-            padding: 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav a:hover {
-            color: #3498db;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Login Section Styles */
-        .login-section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 2rem;
-            margin: 3rem auto;
-            text-align: center;
-            max-width: 500px;
-        }
-
-        .login-title {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        /* Login Button Styles */
-        .login-btn {
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            max-width: 300px;
-            margin: 1rem 0;
-        }
-
-        .login-btn:hover {
-            background-color: #3498db;
-        }
-
-        /* Netlify Identity Modal Customization */
-        .netlify-identity-modal {
-            direction: rtl;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .netlify-identity-modal h1 {
-            text-align: right !important;
-            color: #2c3e50 !important;
-        }
-
-        .netlify-identity-modal input {
-            text-align: right !important;
-            padding: 0.8rem !important;
-        }
-
-        .netlify-identity-modal button[type="submit"] {
-            background-color: #2980b9 !important;
-            transition: background-color 0.3s ease !important;
-        }
-
-        .netlify-identity-modal button[type="submit"]:hover {
-            background-color: #3498db !important;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-        }
+        /* Your existing Arabic styles */
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <h1>شركة التصميم الداخلي والبناء</h1>
-    </header>
+    <button id="login-btn" class="login-btn">تسجيل الدخول</button>
+    <div id="profile" style="display:none;"></div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="#home">الرئيسية</a>
-        <a href="#services">الخدمات</a>
-        <a href="#projects">المشاريع</a>
-        <a href="#contact">اتصل بنا</a>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Login Section -->
-        <section class="login-section">
-            <h2 class="login-title">مرحبا بك في نظام متابعة المشاريع</h2>
-            <button class="login-btn" id="loginButton">تسجيل الدخول</button>
-            <p>للوصول إلى تحديثات مشروعك، يرجى استخدام بيانات الدخول المرسلة إلى بريدك الإلكتروني</p>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2024 شركة التصميم الداخلي والبناء. جميع الحقوق محفوظة</p>
-    </footer>
-
-    <!-- Netlify Identity Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Netlify Identity
-            if (window.netlifyIdentity) {
-                window.netlifyIdentity.init();
-                
-                // Add click handler for login button
-                const loginButton = document.getElementById('loginButton');
-                if (loginButton) {
-                    loginButton.addEventListener('click', () => {
-                        window.netlifyIdentity.open('login');
-                    });
-                }
-
-                // Handle login events
-                window.netlifyIdentity.on('login', user => {
-                    console.log('User logged in:', user);
-                    window.location.href = '/dashboard/';
-                });
-
-                // Handle errors
-                window.netlifyIdentity.on('error', err => {
-                    console.error('Identity Error:', err);
-                    alert('حدث خطأ في نظام الدخول. يرجى المحاولة لاحقًا.');
-                });
-            } else {
-                console.error('Netlify Identity widget failed to load!');
-                alert('تعذر تحميل نظام الدخول. يرجى تحديث الصفحة.');
+        // Configure Auth0
+        const auth0Client = await createAuth0Client({
+            domain: 'dev-3f1bvu4y3t2osny6.us.auth0.com',
+            client_id: 'W0qCGGNiqUX4gZ5EBjGkKw2a9XqZZr9g',
+            cacheLocation: 'localstorage',
+            language: 'ar', // Force Arabic interface
+            authorizationParams: {
+                redirect_uri: window.location.href
             }
         });
+
+        // Login button
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            await auth0Client.loginWithPopup();
+            showUserProfile();
+        });
+
+        // Show profile
+        async function showUserProfile() {
+            const user = await auth0Client.getUser();
+            document.getElementById('profile').innerHTML = `
+                <h2>مرحبا ${user.given_name}!</h2>
+                <p>البريد الإلكتروني: ${user.email}</p>
+                <button onclick="logout()">تسجيل الخروج</button>
+            `;
+            document.getElementById('profile').style.display = 'block';
+        }
+
+        // Logout
+        async function logout() {
+            await auth0Client.logout();
+            window.location.reload();
+        }
+
+        // Check existing session
+        if (await auth0Client.isAuthenticated()) {
+            showUserProfile();
+        }
     </script>
 </body>
 </html>
