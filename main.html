@@ -3,187 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركة التصميم الداخلي - متابعة المشاريع</title>
+    <title>نظام متابعة المشاريع</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-        }
-
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .nav {
-            background-color: #34495e;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .login-section {
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .login-btn {
-            background-color: #2980b9;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-size: 1.1rem;
+        /* Previous CSS styles */
+        #login-button {
             cursor: pointer;
-            transition: background-color 0.3s;
+            position: relative;
+            z-index: 1000;
         }
-
-        .login-btn:hover {
-            background-color: #3498db;
-        }
-
-        .dashboard {
+        
+        .loading {
             display: none;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-        }
-
-        .user-info {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .project-status {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .logout-btn {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 1rem;
+            color: #2c3e50;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>شركة التصميم الداخلي والبناء</h1>
-    </header>
-
-    <nav class="nav">
-        <a href="#home">الرئيسية</a>
-        <a href="#services">الخدمات</a>
-        <a href#projects">المشاريع</a>
-        <a href="#contact">اتصل بنا</a>
-    </nav>
-
-    <div class="main-content">
-        <div class="login-section">
-            <button class="login-btn" id="login-button">تسجيل الدخول لمتابعة مشروعك</button>
-        </div>
-
-        <div class="dashboard" id="dashboard">
-            <div class="user-info">
-                <h2>مرحبا، <span id="user-name"></span></h2>
-                <p>البريد الإلكتروني: <span id="user-email"></span></p>
-                <button class="logout-btn" id="logout-button">تسجيل الخروج</button>
-            </div>
-
-            <div class="project-status">
-                <h3>حالة المشروع الحالية</h3>
-                <p>مرحلة التصميم: مكتمل 100%</p>
-                <p>مرحلة البناء: جاري التنفيذ 65%</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 65%"></div>
-                </div>
-            </div>
-
-            <div class="project-updates">
-                <h3>آخر التحديثات</h3>
-                <ul id="updates-list">
-                    <li>15 أكتوبر: تم الانتهاء من الأعمال الكهربائية</li>
-                    <li>10 أكتوبر: بدء أعمال السباكة</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <!-- Previous HTML structure -->
+    <div class="loading" id="loading">جاري التحميل...</div>
 
     <script>
-        // Auth0 Configuration - Replace with your credentials
-       const auth0 = await createAuth0Client({
-            domain: 'YOUR_DOMAIN.auth0.com', // ← Replace this
-            client_id: 'YOUR_CLIENT_ID',     // ← Replace this
-            cacheLocation: 'localstorage',
-            authorizationParams: {
-                redirect_uri: window.location.href
-            },
-            language: 'ar'
-        });
+        (async function() {
+            // Show loading state
+            document.getElementById('loading').style.display = 'block';
+            
+            try {
+                // Initialize Auth0 client
+                const auth0 = await createAuth0Client({
+                    domain: 'dev-3f1bvu4y3t2osny6.us.auth0.com',
+                    client_id: 'W0qCGGNiqUX4gZ5EBjGkKw2a9XqZZr9g',
+                    cacheLocation: 'localstorage',
+                    authorizationParams: {
+                        redirect_uri: window.location.href
+                    },
+                    language: 'ar'
+                });
 
-        // Login Handler
-        document.getElementById('login-button').addEventListener('click', async () => {
-            await auth0.loginWithPopup();
-            showDashboard();
-        });
+                // Add login handler after DOM loads
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.getElementById('login-button').addEventListener('click', async () => {
+                        try {
+                            await auth0.loginWithPopup();
+                            showDashboard(auth0);
+                        } catch (error) {
+                            console.error('Login failed:', error);
+                            alert('فشل تسجيل الدخول! يرجى المحاولة مرة أخرى.');
+                        }
+                    });
+                });
 
-        // Logout Handler
-        document.getElementById('logout-button').addEventListener('click', () => {
-            auth0.logout({
-                returnTo: window.location.href
-            });
-        });
+                // Check existing session
+                if (await auth0.isAuthenticated()) {
+                    showDashboard(auth0);
+                }
 
-        // Show Dashboard
-        async function showDashboard() {
-            const user = await auth0.getUser();
-            document.getElementById('user-name').textContent = user.given_name || 'العميل الكريم';
-            document.getElementById('user-email').textContent = user.email;
-            document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('login-button').style.display = 'none';
-        }
+            } catch (initError) {
+                console.error('Initialization failed:', initError);
+                alert('حدث خطأ في تحميل النظام! يرجى تحديث الصفحة.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        })();
 
-        // Check Authentication Status
-        async function checkAuth() {
-            const isAuthenticated = await auth0.isAuthenticated();
-            if (isAuthenticated) {
-                showDashboard();
+        async function showDashboard(auth0) {
+            try {
+                const user = await auth0.getUser();
+                document.getElementById('user-name').textContent = user.given_name || 'العميل الكريم';
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('dashboard').style.display = 'block';
+                document.getElementById('login-button').style.display = 'none';
+            } catch (error) {
+                console.error('Dashboard error:', error);
             }
         }
-
-        // Initial Check
-        checkAuth();
     </script>
 </body>
 </html>
