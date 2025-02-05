@@ -161,7 +161,7 @@
                 };
 
                 // Make the request to GitHub to commit the changes
-                const commitResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE}`, {
+                const commitResponse = await fetch(`https://api.github.com/repos/wahabo55/elegancecornerkw/contents/projectData.json`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `token ${GITHUB_TOKEN}`,
