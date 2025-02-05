@@ -81,7 +81,6 @@
     </div>
 
     <script>
-        // Function to handle login
         async function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -95,11 +94,15 @@
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
+                // Set logged-in status in localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                console.log('Login successful. Redirecting to dashboard...'); // Debugging
                 // Redirect to dashboard
                 window.location.href = 'dashboard.html';
             } else {
                 // Show error message
                 errorMessage.style.display = 'block';
+                console.log('Invalid credentials.'); // Debugging
             }
         }
     </script>
