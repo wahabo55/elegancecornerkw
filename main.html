@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة متابعة المشروع - إليجانس كورنر ديزاينز</title>
+    <title>لوحة التحكم</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -23,246 +23,111 @@
             text-align: center;
         }
         header {
-            background-color: #002d4d; 
+            background-color: #002d4d;
             color: #fff;
             padding: 30px;
             border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
         }
         header h1 {
             font-size: 32px;
             font-weight: 700;
-            margin-bottom: 10px;
         }
-        header p {
-            font-size: 18px;
-            font-weight: 500;
-            opacity: 0.8;
+        .project-status {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            color: #343a40;
-            margin-bottom: 20px;
+        .project-status h2 {
             font-size: 24px;
-            font-weight: 600;
-        }
-        p {
-            color: #495057;
-            font-size: 18px;
-            margin: 10px 0;
+            color: #333;
         }
         .progress-bar {
             width: 100%;
-            background: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
-            height: 30px;
+            height: 25px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            margin-top: 10px;
         }
         .progress {
             height: 100%;
-            background: #0d6efd;
-            text-align: center;
-            color: white;
-            line-height: 30px;
-            font-weight: bold;
-            border-radius: 10px 0 0 10px;
+            background-color: #4caf50;
+            border-radius: 8px;
         }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+        .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
             margin-top: 20px;
         }
-        .gallery img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-        li {
-            background: #e9ecef;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .status {
-            color: #17a2b8;
-            font-weight: 500;
-        }
-        .comments {
-            margin-top: 20px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            color: #343a40;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .customer-details {
-            background-color: #f1f3f5;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .customer-details h3 {
-            margin-bottom: 15px;
-            font-size: 22px;
-            color: #343a40;
-            font-weight: 600;
-        }
-        .customer-details p {
-            color: #495057;
-            font-size: 16px;
-            margin: 5px 0;
-        }
-        .payment-status {
-            font-weight: bold;
-            padding: 5px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .paid {
-            background-color: #28a745;
-            color: white;
-        }
-        .not-paid {
-            background-color: #ffc107;
-            color: white;
-        }
-        .footer {
-            margin-top: 40px;
-            background-color: #002d4d; 
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .footer p {
-            font-size: 14px;
+        .logout-btn:hover {
+            background-color: #cc0000;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <header>
-            <h1>إليجانس كورنر ديزاينز</h1>
-            <p>لوحة متابعة المشاريع - مشروع التصميم الداخلي والبناء</p>
+            <h1>مرحباً في لوحة التحكم</h1>
         </header>
-        <h2>متابعة تقدم المشروع</h2>
-        <p><strong>الحالة:</strong> <span class="status" id="status">تركيب العوارض</span></p>
-        <div class="progress-bar">
-            <div class="progress" id="progress" style="width: 1%;">1%</div>
-        </div>
-        <div class="comments">
-            <p><strong>التعليقات:</strong></p>
-            <p id="comments">تم الانتهاء من الأساسات، والآن يتم تركيب العوارض.</p>
-        </div>
-        <p><strong>تواريخ الدفعات:</strong></p>
-        <ul id="payment-dates">
-            <li>
-                <span>الدفعة الأولى: 15 يناير 2025</span>
-                <span class="payment-status not-paid">لم يتم الدفع</span>
-            </li>
-            <li>
-                <span>الدفعة الثانية: 10 فبراير 2025</span>
-                <span class="payment-status not-paid">لم يتم الدفع</span>
-            </li>
-        </ul>
-        <p><strong>صور المشروع:</strong></p>
-        <div class="gallery">
-            <img src="https://via.placeholder.com/150" alt="صورة 1">
-            <img src="https://via.placeholder.com/150" alt="صورة 2">
+
+        <p>تم تسجيل الدخول بنجاح!</p>
+
+        <!-- Project Status Section (Dynamic) -->
+        <div class="project-status" id="projectStatus">
+            <h2>جاري تحميل بيانات المشروع...</h2>
         </div>
 
-        <div class="customer-details">
-            <h3>تفاصيل العميل</h3>
-            <p><strong>اسم العميل:</strong> محمد أحمد</p>
-            <p><strong>رقم الهاتف:</strong> +965 999 888 777</p>
-            <p><strong>البريد الإلكتروني:</strong> mohammed.ahmed@example.com</p>
-            <p><strong>عنوان المشروع:</strong> السالمية، الكويت</p>
-            <p><strong>تاريخ بدء المشروع:</strong> 1 فبراير 2025</p>
-            <p><strong>تاريخ الانتهاء المتوقع:</strong> 1 يونيو 2025</p>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>&copy; 2025 إليجانس كورنر ديزاينز - جميع الحقوق محفوظة</p>
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
     </div>
 
     <script>
-        // Fetch JSON file and dynamically update page content
-        fetch('projectData.json')
-            .then(response => response.json())
-            .then(data => {
-                // Update project status
-                document.getElementById('status').textContent = data.project.status;
-                document.getElementById('progress').style.width = data.project.progress + '%';
-                document.getElementById('progress').textContent = data.project.progress + '%';
-                document.getElementById('comments').textContent = data.project.comments;
+        // Check if the user is logged in
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html'; // Redirect to login if not logged in
+        }
 
-                // Update payment dates
-                const paymentDatesList = document.getElementById('payment-dates');
-                data.project.paymentDates.forEach(payment => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <span>${payment.date}</span>
-                        <span class="payment-status ${payment.status === 'لم يتم الدفع' ? 'not-paid' : 'paid'}">${payment.status}</span>
-                    `;
-                    paymentDatesList.appendChild(li);
-                });
-
-                // Update gallery
-                const gallery = document.querySelector('.gallery');
-                data.project.images.forEach(image => {
-                    const img = document.createElement('img');
-                    img.src = image;
-                    img.alt = 'صورة';
-                    gallery.appendChild(img);
-                });
-
-                // Update customer details
-                const customerDetails = document.querySelector('.customer-details');
-                customerDetails.innerHTML = `
-                    <h3>تفاصيل العميل</h3>
-                    <p><strong>اسم العميل:</strong> ${data.customer.name}</p>
-                    <p><strong>رقم الهاتف:</strong> ${data.customer.phone}</p>
-                    <p><strong>البريد الإلكتروني:</strong> ${data.customer.email}</p>
-                    <p><strong>عنوان المشروع:</strong> ${data.customer.address}</p>
-                    <p><strong>تاريخ بدء المشروع:</strong> ${data.customer.startDate}</p>
-                    <p><strong>تاريخ الانتهاء المتوقع:</strong> ${data.customer.endDate}</p>
-                `;
-            })
-            .catch(error => console.error('Error loading project data:', error));
-
-        // Basic login function (for demonstration)
-        function login(username, password) {
+        // Function to fetch and display project data from JSON
+        function loadProjectData() {
             fetch('projectData.json')
                 .then(response => response.json())
                 .then(data => {
-                    if (username === data.loginCredentials.username && password === data.loginCredentials.password) {
-                        alert('تسجيل دخول ناجح');
-                        // Redirect or show project details
-                    } else {
-                        alert('بيانات تسجيل الدخول غير صحيحة');
-                    }
+                    const projectStatusElement = document.getElementById('projectStatus');
+                    
+                    // Update project status dynamically from JSON data
+                    projectStatusElement.innerHTML = `
+                        <h2>${data.projectTitle}</h2>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${data.progress}%"></div>
+                        </div>
+                        <p>التاريخ التالي: ${data.nextUpdate}</p>
+                        <p>ملاحظات: ${data.notes}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching project data:', error);
+                    document.getElementById('projectStatus').innerHTML = '<p>حدث خطأ في تحميل بيانات المشروع. الرجاء المحاولة لاحقاً.</p>';
                 });
         }
+
+        // Call the function to load project data when the page loads
+        loadProjectData();
+
+        // Logout function to clear the session
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html'; // Redirect to login page after logout
+        }
     </script>
+
 </body>
 </html>
