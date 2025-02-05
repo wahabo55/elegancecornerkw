@@ -17,8 +17,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
+
         .login-container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
@@ -26,29 +27,65 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
-            width: 350px;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center all child elements horizontally */
         }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
         .login-container h1 {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
             color: #ff6f61;
         }
+
+        .input-group {
+            position: relative;
+            margin: 10px 0;
+            width: 100%; /* Ensure input groups take full width */
+        }
+
         .login-container input {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
             border: none;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
             color: #ffffff;
             font-size: 16px;
+            transition: background 0.3s, box-shadow 0.3s;
         }
+
         .login-container input::placeholder {
             color: #e0e0e0;
         }
+
+        .login-container input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+            outline: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+
         .login-container button {
-            width: 100%;
+            width: 100%; /* Same width as input fields */
             padding: 12px;
             margin-top: 20px;
             border: none;
@@ -58,29 +95,78 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
+
         .login-container button:hover {
             background: linear-gradient(135deg, #ff4757, #ff6f61);
+            transform: translateY(-2px);
         }
+
+        .login-container button:active {
+            transform: translateY(0);
+        }
+
         .error-message {
             color: #ff7675;
             font-size: 14px;
             margin-top: 10px;
             display: none;
         }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h1 {
+                font-size: 24px;
+            }
+
+            .login-container input {
+                font-size: 14px;
+            }
+
+            .login-container button {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
+        <!-- Logo -->
+        <img src="elegancelogo.png" alt="شعار إليجانس كورنر ديزاينز" class="logo">
+
         <h1>تسجيل الدخول</h1>
-        <input type="text" id="username" placeholder="اسم المستخدم">
-        <input type="password" id="password" placeholder="كلمة المرور">
+        <div class="input-group">
+            <input type="text" id="username" placeholder="اسم المستخدم">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+        </div>
         <button onclick="login()">تسجيل الدخول</button>
         <div class="error-message" id="error-message">اسم المستخدم أو كلمة المرور غير صحيحة!</div>
     </div>
 
     <script>
+        // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '👁️‍🗨️'; // Open eye emoji
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️'; // Closed eye emoji
+            }
+        }
+
+        // Function to handle login
         async function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
