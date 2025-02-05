@@ -6,6 +6,7 @@
     <title>تسجيل الدخول</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Same style as before */
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: #f4f7f9;
@@ -83,8 +84,9 @@
                 .then(data => {
                     // Check if the entered credentials match the data in the JSON file
                     if (username === data.username && password === data.password) {
-                        // If credentials are correct, redirect or show a success message
-                        window.location.href = 'dashboard.html'; // Example: redirect to dashboard
+                        // If credentials are correct, store session in sessionStorage
+                        sessionStorage.setItem('isLoggedIn', 'true');
+                        window.location.href = 'dashboard.html'; // Redirect to dashboard
                     } else {
                         // Show error message if credentials are incorrect
                         document.getElementById('error-message').textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
