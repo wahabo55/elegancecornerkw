@@ -1,9 +1,9 @@
 {
-    "projectTitle": "تركيب العوارض",
-    "progress": 60,
+    "projectTitle": "البدء في الاعمال ",
+    "progress": 1,
     "nextUpdate": "2025-02-10",
-    "notes": "تم البدء في تركيب العوارض بنجاح. سيتم إضافة التحديثات قريباً.",
-    "comments": "تم الانتهاء من الأساسات، والآن يتم تركيب العوارض.",
+    "notes": "تم البدء الاعمال. سيتم إضافة التحديثات قريباً.",
+    "comments": "البدء في ازالة المضلة امام المنزل",
     "images": [
         "https://via.placeholder.com/150",
         "https://via.placeholder.com/150",
@@ -19,12 +19,11 @@
     },
     "paymentDates": [
         {
-            "paymentDate": "2025-01-15",
-            "status": "لم يتم الدفع"
+            "paymentDate": "2025-02-5",
+            "status": "تم الدفع"
         },
         {
-            "paymentDate": "2025-02-10",
-            "status": "لم يتم الدفع"
+
         }
     ]
 }
