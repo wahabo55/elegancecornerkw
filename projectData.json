@@ -2,11 +2,29 @@
     "projectTitle": "تركيب العوارض",
     "progress": 60,
     "nextUpdate": "2025-02-10",
-    "notes": "تم البدء في تركيب العوارض بنجاح. سيتم إضافة التحديثات قريباً."
+    "notes": "تم البدء في تركيب العوارض بنجاح. سيتم إضافة التحديثات قريباً.",
+    "comments": "تم الانتهاء من الأساسات، والآن يتم تركيب العوارض.",
+    "images": [
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150"
+    ],
+    "customerDetails": {
+        "customerName": "محمد أحمد",
+        "phone": "+965 999 888 777",
+        "email": "mohammed.ahmed@example.com",
+        "projectAddress": "السالمية، الكويت",
+        "startDate": "2025-02-01",
+        "endDate": "2025-06-01"
+    },
+    "paymentDates": [
+        {
+            "paymentDate": "2025-01-15",
+            "status": "لم يتم الدفع"
+        },
+        {
+            "paymentDate": "2025-02-10",
+            "status": "لم يتم الدفع"
+        }
+    ]
 }
-
-  },
-  "loginCredentials": {
-    "username": "admin",
-    "password": "1234"
-  }
