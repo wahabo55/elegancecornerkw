@@ -109,15 +109,27 @@
 
     <script>
         const PASSWORD = "admin123"; // 👈 ضع كلمة مرور هنا للدخول إلى لوحة التحكم
+        const GITHUB_TOKEN = "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"; // 👈 ضع الرمز المميز هنا
+        const GITHUB_REPO = "wahabo55/elegancecornerkw"; // 👈 اسم المستودع الخاص بك
+        const DATA_FILE = "projectData.json"; // 👈 اسم الملف الذي يحتوي على بيانات المشروع
 
         async function fetchProjectData() {
-            const githubRepo = "USERNAME/REPO_NAME"; // 👈 ضع اسم المستخدم والمستودع هنا
-            const dataFile = "data.json"; 
-
             try {
-                const response = await fetch(`https://raw.githubusercontent.com/${githubRepo}/main/${dataFile}`);
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${DATA_FILE}`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `token ${GITHUB_TOKEN}`,
+                        "Accept": "application/vnd.github.v3.raw"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data from GitHub");
+                }
+
                 const projectData = await response.json();
 
+                // Update the UI with the project data
                 document.getElementById('status').value = projectData.status;
                 document.getElementById('progress').value = projectData.progress;
                 document.getElementById('comments').value = projectData.comments;
