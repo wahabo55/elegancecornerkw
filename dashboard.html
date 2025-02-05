@@ -82,6 +82,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            cursor: pointer;
         }
         .gallery img:hover {
             transform: scale(1.05);
@@ -156,6 +157,45 @@
         .footer p {
             font-size: 14px;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        #caption {
+            text-align: center;
+            color: #f1f1f1;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -179,12 +219,11 @@
                 <span>الدفعة الأولى: 5 فبراير 2025</span>
                 <span class="payment-status paid">تم الدفع</span>
             </li>
-
         </ul>
         <p><strong>صور المشروع:</strong></p>
         <div class="gallery">
-            <img src="image1.jpeg" alt="صورة 1">
-            <img src="image2.jpeg" alt="صورة 2">
+            <img src="image1.jpeg" alt="صورة 1" onclick="openModal(this)">
+            <img src="image2.jpeg" alt="صورة 2" onclick="openModal(this)">
         </div>
 
         <!-- Customer Details Section -->
@@ -202,7 +241,30 @@
         <p>&copy; 2025 إليجانس كورنر ديزاينز - جميع الحقوق محفوظة</p>
     </div>
 
+    <!-- Modal for image gallery -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
     <script>
+        // JavaScript for the modal functionality
+        function openModal(image) {
+            var modal = document.getElementById('imageModal');
+            var modalImg = document.getElementById("modalImage");
+            var captionText = document.getElementById("caption");
+
+            modal.style.display = "block";
+            modalImg.src = image.src;
+            captionText.innerHTML = image.alt;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('imageModal');
+            modal.style.display = "none";
+        }
+
         // JavaScript code to automatically update the progress bar
         function updateProgressBar(percentage) {
             const progressElement = document.getElementById('progress');
