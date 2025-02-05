@@ -57,6 +57,34 @@
             background-color: #4caf50;
             border-radius: 8px;
         }
+        .comments {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .comments h3 {
+            font-size: 20px;
+            color: #333;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
         .logout-btn {
             background-color: #ff4d4d;
             color: white;
@@ -86,6 +114,17 @@
             <h2>جاري تحميل بيانات المشروع...</h2>
         </div>
 
+        <!-- Comments Section -->
+        <div class="comments" id="comments">
+            <h3>التعليقات</h3>
+            <p>جاري تحميل التعليقات...</p>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="gallery" id="gallery">
+            <p>جاري تحميل الصور...</p>
+        </div>
+
         <!-- Logout Button -->
         <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
     </div>
@@ -96,14 +135,13 @@
             window.location.href = 'login.html'; // Redirect to login if not logged in
         }
 
-        // Function to fetch and display project data from JSON
+        // Function to fetch and display all project data from JSON
         function loadProjectData() {
             fetch('projectData.json')
                 .then(response => response.json())
                 .then(data => {
+                    // Project Status Section
                     const projectStatusElement = document.getElementById('projectStatus');
-                    
-                    // Update project status dynamically from JSON data
                     projectStatusElement.innerHTML = `
                         <h2>${data.projectTitle}</h2>
                         <div class="progress-bar">
@@ -112,6 +150,24 @@
                         <p>التاريخ التالي: ${data.nextUpdate}</p>
                         <p>ملاحظات: ${data.notes}</p>
                     `;
+
+                    // Comments Section
+                    const commentsElement = document.getElementById('comments');
+                    commentsElement.innerHTML = `
+                        <h3>التعليقات:</h3>
+                        <p>${data.comments}</p>
+                    `;
+
+                    // Image Gallery Section
+                    const galleryElement = document.getElementById('gallery');
+                    galleryElement.innerHTML = '';
+                    data.images.forEach(image => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image;
+                        imgElement.alt = 'صورة المشروع';
+                        galleryElement.appendChild(imgElement);
+                    });
+
                 })
                 .catch(error => {
                     console.error('Error fetching project data:', error);
