@@ -3,100 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>تسجيل الدخول - إليجانس كورنر ديزاينز</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f4f7f9;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: #ffffff;
+            direction: rtl;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .login-container {
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
+            width: 350px;
         }
         .login-container h1 {
             font-size: 28px;
+            font-weight: 700;
             margin-bottom: 20px;
-            color: #333;
+            color: #ff6f61;
         }
         .login-container input {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
             font-size: 16px;
-            color: #333;
+        }
+        .login-container input::placeholder {
+            color: #e0e0e0;
         }
         .login-container button {
             width: 100%;
-            padding: 15px;
-            background-color: #0056b3;
-            color: #fff;
+            padding: 12px;
+            margin-top: 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff6f61, #ff4757);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s;
         }
         .login-container button:hover {
-            background-color: #003d7a;
+            background: linear-gradient(135deg, #ff4757, #ff6f61);
         }
         .error-message {
-            color: red;
-            margin-top: 10px;
+            color: #ff7675;
             font-size: 14px;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
-
     <div class="login-container">
         <h1>تسجيل الدخول</h1>
-        <input type="text" id="username" placeholder="اسم المستخدم" required>
-        <input type="password" id="password" placeholder="كلمة المرور" required>
+        <input type="text" id="username" placeholder="اسم المستخدم">
+        <input type="password" id="password" placeholder="كلمة المرور">
         <button onclick="login()">تسجيل الدخول</button>
-        <p class="error-message" id="error-message"></p>
+        <div class="error-message" id="error-message">اسم المستخدم أو كلمة المرور غير صحيحة!</div>
     </div>
 
     <script>
-        // Function to login based on the credentials from the JSON file
-        function login() {
-            // Get the username and password entered by the user
+        // Function to handle login
+        async function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
 
-            // Fetch the login data from the JSON file
-            fetch('loginData.json')
-                .then(response => response.json())
-                .then(data => {
-                    // Check if the entered credentials match the data in the JSON file
-                    if (username === data.username && password === data.password) {
-                        // If credentials are correct, store session in sessionStorage
-                        sessionStorage.setItem('isLoggedIn', 'true');
-                        window.location.href = 'dashboard.html'; // Redirect to dashboard
-                    } else {
-                        // Show error message if credentials are incorrect
-                        document.getElementById('error-message').textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading login data:', error);
-                    document.getElementById('error-message').textContent = 'حدث خطأ أثناء تحميل البيانات. الرجاء المحاولة لاحقاً.';
-                });
+            // Fetch login data from loginData.json
+            const response = await fetch('loginData.json');
+            const users = await response.json();
+
+            // Check if credentials match
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+            }
         }
     </script>
-
 </body>
 </html>
