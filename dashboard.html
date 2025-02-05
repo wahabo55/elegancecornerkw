@@ -6,7 +6,6 @@
     <title>لوحة متابعة المشروع - إليجانس كورنر ديزاينز</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* The same styling as before */
         body {
             font-family: 'Tajawal', sans-serif;
             margin: 0;
@@ -24,12 +23,12 @@
             text-align: center;
         }
         header {
-            background-color: #002d4d; 
+            background-color: #002d4d; /* Darker, more professional shade */
             color: #fff;
             padding: 30px;
             border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
         }
         header h1 {
             font-size: 32px;
@@ -39,7 +38,7 @@
         header p {
             font-size: 18px;
             font-weight: 500;
-            opacity: 0.8;
+            opacity: 0.8; /* Slightly faded for subtlety */
         }
         h2 {
             color: #343a40;
@@ -147,7 +146,7 @@
         }
         .footer {
             margin-top: 40px;
-            background-color: #002d4d; 
+            background-color: #002d4d; /* Matching with header */
             color: white;
             padding: 20px;
             border-radius: 12px;
@@ -176,22 +175,30 @@
         </div>
         <p><strong>تواريخ الدفعات:</strong></p>
         <ul id="payment-dates">
-            <!-- Dynamic list of payment dates will be loaded here -->
+            <li>
+                <span>الدفعة الأولى: 15 يناير 2025</span>
+                <span class="payment-status not-paid">لم يتم الدفع</span>
+            </li>
+            <li>
+                <span>الدفعة الثانية: 10 فبراير 2025</span>
+                <span class="payment-status not-paid">لم يتم الدفع</span>
+            </li>
         </ul>
         <p><strong>صور المشروع:</strong></p>
         <div class="gallery">
-            <!-- Dynamic gallery of project images will be loaded here -->
+            <img src="https://via.placeholder.com/150" alt="صورة 1">
+            <img src="https://via.placeholder.com/150" alt="صورة 2">
         </div>
 
         <!-- Customer Details Section -->
         <div class="customer-details">
             <h3>تفاصيل العميل</h3>
-            <p><strong>اسم العميل:</strong> <span id="client-name">محمد أحمد</span></p>
-            <p><strong>رقم الهاتف:</strong> <span id="client-phone">+965 999 888 777</span></p>
-            <p><strong>البريد الإلكتروني:</strong> <span id="client-email">mohammed.ahmed@example.com</span></p>
-            <p><strong>عنوان المشروع:</strong> <span id="project-address">السالمية، الكويت</span></p>
-            <p><strong>تاريخ بدء المشروع:</strong> <span id="start-date">1 فبراير 2025</span></p>
-            <p><strong>تاريخ الانتهاء المتوقع:</strong> <span id="end-date">1 يونيو 2025</span></p>
+            <p><strong>اسم العميل:</strong> محمد أحمد</p>
+            <p><strong>رقم الهاتف:</strong> +965 999 888 777</p>
+            <p><strong>البريد الإلكتروني:</strong> mohammed.ahmed@example.com</p>
+            <p><strong>عنوان المشروع:</strong> السالمية، الكويت</p>
+            <p><strong>تاريخ بدء المشروع:</strong> 1 فبراير 2025</p>
+            <p><strong>تاريخ الانتهاء المتوقع:</strong> 1 يونيو 2025</p>
         </div>
     </div>
 
@@ -200,44 +207,18 @@
     </div>
 
     <script>
-        // Fetch the JSON data from GitHub
-        fetch('https://github.com/wahabo55/elegancecornerkw/blob/main/projectData.json')  // Replace with your actual GitHub file URL
-            .then(response => response.json())
-            .then(data => {
-                // Update the content with the fetched data
-                document.getElementById('status').textContent = data.status;
-                document.getElementById('progress').style.width = data.progress + '%';
-                document.getElementById('progress').textContent = data.progress + '%';
-                document.getElementById('comments').textContent = data.comments;
+        // JavaScript code to automatically update the progress bar
+        function updateProgressBar(percentage) {
+            const progressElement = document.getElementById('progress');
+            const progressBar = document.querySelector('.progress-bar');
+            progressElement.style.width = percentage + '%';
+            progressElement.textContent = percentage + '%';
+        }
 
-                // Update payment dates dynamically
-                const paymentDatesList = document.getElementById('payment-dates');
-                paymentDatesList.innerHTML = ''; // Clear the list before adding new items
-                data.paymentDates.forEach(payment => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<span>${payment.date}</span> <span class="payment-status ${payment.status === 'paid' ? 'paid' : 'not-paid'}">${payment.status === 'paid' ? 'تم الدفع' : 'لم يتم الدفع'}</span>`;
-                    paymentDatesList.appendChild(li);
-                });
-
-                // Update gallery images dynamically
-                const gallery = document.querySelector('.gallery');
-                gallery.innerHTML = ''; // Clear existing images
-                data.images.forEach(image => {
-                    const img = document.createElement('img');
-                    img.src = image.url;
-                    img.alt = image.alt;
-                    gallery.appendChild(img);
-                });
-
-                // Update customer details
-                document.getElementById('client-name').textContent = data.customer.name;
-                document.getElementById('client-phone').textContent = data.customer.phone;
-                document.getElementById('client-email').textContent = data.customer.email;
-                document.getElementById('project-address').textContent = data.projectAddress;
-                document.getElementById('start-date').textContent = data.startDate;
-                document.getElementById('end-date').textContent = data.endDate;
-            })
-            .catch(error => console.error('Error fetching JSON data:', error));
+        // Example: Update progress bar to 75% after 2 seconds
+        setTimeout(() => {
+            updateProgressBar(2); // Change this to the percentage you want
+        }, 2000); // Delay 2 seconds for demonstration
     </script>
 </body>
 </html>
